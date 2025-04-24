@@ -35,6 +35,4 @@ public class DeleteExpenseServlet extends HttpServlet{
 		resp.sendRedirect("user/viewExpense.jsp");
 	}
 	
-	
-	
 }

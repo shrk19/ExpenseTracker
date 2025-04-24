@@ -27,7 +27,10 @@
 		</div>
 		
 		<c:if test="${not empty msg}">
-			<p class="alert alert-success">${msg}</p>
+			<div class="alert alert-success alert-dismissible fade show">
+				${msg}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
 			<c:remove var="msg" />
 		</c:if>
 		<table class="table table-hover">

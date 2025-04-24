@@ -34,17 +34,17 @@
 					<div class="mb-3">
 						<label for="title" class="form-label">Title</label> <input
 							type="text" class="form-control" id="title" name="title"
-							value="<%=ex.getTitle()%>">
+							value="<%=ex.getTitle()%>" required>
 					</div>
 					<div class="mb-3">
 						<label for="date" class="form-label">Date</label> <input
 							type="date" class="form-control" id="date" name="date"
-							value="<%=ex.getDate()%>">
+							value="<%=ex.getDate()%>" required>
 					</div>
 					<label for="amount" class="form-label">Amount</label>
 					<div class="input-group mb-3">
 						<span class="input-group-text">Rs.</span> <input type="text"
-							class="form-control" name="amount" value="<%=ex.getAmount()%>">
+							class="form-control" name="amount" value="<%=ex.getAmount()%>" required>
 						<span class="input-group-text">.00</span>
 					</div>
 

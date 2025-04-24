@@ -2,6 +2,8 @@ package com.servlet;
 
 import java.io.IOException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,8 +27,9 @@ public class RegisterServlet extends HttpServlet{
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		String pass = req.getParameter("password");
+		String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
 	
-		User u = new User(name, email, pass);
+		User u = new User(name, email, hashedPassword);
 		System.out.println(u);
 		
 		userDao = new UserDao(HibernateUtil.getSessionFactory());

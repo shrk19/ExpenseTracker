@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.mindrot.jbcrypt.BCrypt;
 
 import com.db.HibernateUtil;
 import com.entity.User;
@@ -66,17 +67,22 @@ public class UserDao {
 	public User loginUser(String email, String password) {
 
 		User user = null;
+		boolean isPasswordCorrect = false;
 		try {
 			session = factory.openSession();
 			tx = session.beginTransaction();
 			
-			String hql = "FROM User WHERE email = :email AND password = :password";
+			String hql = "FROM User WHERE email = :email";
 	        Query q = session.createQuery(hql, User.class);
 	        q.setParameter("email", email);
-	        q.setParameter("password", password);
 	        
 	        user = (User)q.getSingleResult();
 	        System.out.println("from query : "+user);
+	        
+	        isPasswordCorrect = user!=null ? BCrypt.checkpw(password, user.getPassword()) : false;
+	        
+	        if(!isPasswordCorrect) user = null;
+	        
 			tx.commit();
 			
 		}catch(Exception e) {
@@ -87,6 +93,4 @@ public class UserDao {
 		return user;
 	}
 	
-	
-
 }

@@ -2,6 +2,8 @@ package com.servlet;
 
 import java.io.IOException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.dao.UserDao;
 import com.db.HibernateUtil;
 import com.entity.User;
@@ -27,12 +29,12 @@ public class LoginServlet extends HttpServlet {
 		User user = userDao.loginUser(email, password);
 		
 		HttpSession session = req.getSession();
-		if(user==null) {
-			session.setAttribute("msg", "Invalid username or password");
-			resp.sendRedirect("login.jsp");
-		}else {
+		if(user!=null) {
 			session.setAttribute("loginUser", user);
 			resp.sendRedirect("user/home.jsp");
+		}else {
+			session.setAttribute("msg", "Invalid username or password");
+			resp.sendRedirect("login.jsp");
 		}
 	}
 
